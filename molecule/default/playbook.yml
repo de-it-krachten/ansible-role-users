@@ -1,0 +1,24 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    grps:
+      - name: user1
+      - name: user2
+      - name: group1
+      - name: group2
+    users:
+      - name: user1
+      - name: user2
+  tasks:
+
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 1
+      become: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: "Include ansible-role-users"
+      include_role:
+        name: "ansible-role-users"

@@ -1,0 +1,95 @@
+---
+
+- name: Delete all obsolete users
+  user:
+    name: "{{ item.name }}"
+    state: absent
+    remove: yes
+  loop: "{{ users_rm }}"
+
+- name: Delete obsolete groups
+  group:
+    name: "{{ item.name }}"
+    state: absent
+  loop: "{{ grps_rm }}"
+
+- name: Create all groups
+  group:
+    state: present
+    name: "{{ item.name }}"
+    gid: "{{ item.gid | default(omit) }}"
+  with_items: "{{ grps }}"
+
+- name: Create all users
+  user:
+    name: "{{ item.name }}"
+    uid: "{{ item.uid | default(omit) }}"
+    group: "{{ item.group | default(item.name) }}"
+    groups: "{{ item.groups | default(omit) }}"
+    password: "{{ item.password | default(omit) }}"
+    update_password: "{{ update_password | default('on_create') }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    comment: "{{ item.fullname | default(omit) }}"
+    append: "{{ true if item.groups is defined else omit }}"
+  loop: "{{ users }}"
+  loop_control:
+    label:
+      - "name: {{ item.name }}"
+
+- name: Add public key to user
+  authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ item.sshkey }}"
+  when: item.sshkey is defined and item.sshkey|length > 0
+  loop: "{{ users }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Setup password less sudo
+  template:
+    src: sudo-nopasswd.j2
+    dest: "/etc/sudoers.d/u_{{ item.name }}"
+    owner: root
+    group: root
+    mode: '0440'
+  when: item.sudo is defined and item.sudo
+  loop: "{{ users }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Setup git configuration
+  template:
+    src: gitconfig.j2
+    dest: "/home/{{ item.name }}/.gitconfig"
+    owner: "{{ item.name }}"
+    group: "{{ item.group | default(item.name) }}"
+    mode: '0644'
+  when:
+    - item.gitconfig is defined
+    - item.gitconfig
+    - item.fullname is defined
+    - item.email is defined
+  loop: "{{ users }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Check if .bash_profile exists
+  stat:
+    path: "/home/{{ item.name }}/.bash_profile"
+  when: users is defined
+  register: bash_profile
+  loop: "{{ users }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Create .bash_profile
+  file:
+    state: "{{ 'file' if item.stat.exists else 'touch' }}"
+    path: "/home/{{ item.item.name }}/.bash_profile"
+    owner: "{{ item.item.name }}"
+    group: "{{ item.item.group | default(item.item.name) }}"
+    mode: '0644'
+  loop: "{{ bash_profile.results }}"
+  loop_control:
+    label: "{{ item.item.name }}"
