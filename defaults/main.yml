@@ -1,6 +1,13 @@
 ---
 
+# List of users to create
 users: []
+
+# List of groups to create
 grps: []
+
+# List of users to delete
 users_rm: []
+
+# List of groups to delete
 grps_rm: []

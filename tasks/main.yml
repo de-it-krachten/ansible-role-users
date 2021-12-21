@@ -57,39 +57,3 @@
   loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
-
-- name: Setup git configuration
-  template:
-    src: gitconfig.j2
-    dest: "/home/{{ item.name }}/.gitconfig"
-    owner: "{{ item.name }}"
-    group: "{{ item.group | default(item.name) }}"
-    mode: '0644'
-  when:
-    - item.gitconfig is defined
-    - item.gitconfig
-    - item.fullname is defined
-    - item.email is defined
-  loop: "{{ users }}"
-  loop_control:
-    label: "{{ item.name }}"
-
-- name: Check if .bash_profile exists
-  stat:
-    path: "/home/{{ item.name }}/.bash_profile"
-  when: users is defined
-  register: bash_profile
-  loop: "{{ users }}"
-  loop_control:
-    label: "{{ item.name }}"
-
-- name: Create .bash_profile
-  file:
-    state: "{{ 'file' if item.stat.exists else 'touch' }}"
-    path: "/home/{{ item.item.name }}/.bash_profile"
-    owner: "{{ item.item.name }}"
-    group: "{{ item.item.group | default(item.item.name) }}"
-    mode: '0644'
-  loop: "{{ bash_profile.results }}"
-  loop_control:
-    label: "{{ item.item.name }}"
