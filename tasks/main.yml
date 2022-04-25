@@ -26,6 +26,7 @@
     uid: "{{ item.uid | default(omit) }}"
     group: "{{ item.group | default(item.name) }}"
     groups: "{{ item.groups | default(omit) }}"
+    home: "{{ item.home | default(omit) }}"
     password: "{{ item.password | default(omit) }}"
     update_password: "{{ update_password | default('on_create') }}"
     shell: "{{ item.shell | default('/bin/bash') }}"
