@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/de-it-krachten/ansible-role-users/compare/v1.0.0...v1.0.1) (2022-04-26)
+
+
+### Bug Fixes
+
+* add missing home directory (optional) ([6a34901](https://github.com/de-it-krachten/ansible-role-users/commit/6a34901046b3e1ee07e47ce79448640f80451d97))
+
 # 1.0.0 (2022-01-19)
 
 
