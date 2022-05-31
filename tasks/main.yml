@@ -24,7 +24,7 @@
   user:
     name: "{{ item.name }}"
     uid: "{{ item.uid | default(omit) }}"
-    group: "{{ item.group | default(item.name) }}"
+    group: "{{ item.group | default(omit) }}"
     groups: "{{ item.groups | default(omit) }}"
     home: "{{ item.home | default(omit) }}"
     password: "{{ item.password | default(omit) }}"
