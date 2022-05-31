@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/de-it-krachten/ansible-role-users/compare/v1.0.1...v1.0.2) (2022-05-31)
+
+
+### Bug Fixes
+
+* primary group is now omitted by default ([a13c48f](https://github.com/de-it-krachten/ansible-role-users/commit/a13c48f29f1a27b92cf08bd28ab478eba8c8b5d0))
+
 ## [1.0.1](https://github.com/de-it-krachten/ansible-role-users/compare/v1.0.0...v1.0.1) (2022-04-26)
 
 
