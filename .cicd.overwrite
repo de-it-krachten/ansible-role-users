@@ -1,6 +1,9 @@
+---
+
 generic:
   role_description: |
     Creates local users & groups
+
 molecule:
   converge:
     vars:
