@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.0.2...v1.1.0) (2022-07-28)
+
+
+### Features
+
+* Implement ansible-lint v6 support ([2522125](https://github.com/de-it-krachten/ansible-role-users/commit/252212529662770fce1dc30ccf96d5292911f1be))
+
 ## [1.0.2](https://github.com/de-it-krachten/ansible-role-users/compare/v1.0.1...v1.0.2) (2022-05-31)
 
 
