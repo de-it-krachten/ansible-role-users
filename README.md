@@ -15,6 +15,7 @@ Supported platforms
 - Red Hat Enterprise Linux 9<sup>1</sup>
 - CentOS 7
 - RockyLinux 8
+- RockyLinux 9
 - OracleLinux 8
 - AlmaLinux 8
 - AlmaLinux 9
@@ -52,6 +53,7 @@ grps_rm: []
 <pre><code>
 - name: sample playbook for role 'users'
   hosts: all
+  become: "{{ molecule['converge']['become'] | default('yes') }}"
   vars:
     grps: [{'name': 'user1', 'gid': 2000}, {'name': 'user2', 'gid': 2001}, {'name': 'group1', 'gid': 3000}, {'name': 'group2', 'gid': 3001}]
     users: [{'name': 'user1', 'uid': 2000, 'group': 'user1'}, {'name': 'user2', 'uid': 2001, 'group': 'group2', 'shell': '/bin/sh', 'sshkey': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC5rUvo3sZrPcKYmezty1kOUX61jF03EyDJ8DVcmU4heTpTm35/UhltfcJkYPNUChpLJelfm1y+d4MKSJPsBcRmbep3757xUCqQYej9itwpBY0n2XzdurR6uJh1cFfiynsKFnDbr/pqOatY/GedFMVABMtdMf9zJDfYpfEzvDxbN1hpMq+/dJTs+5EjAjgon0mNZ1925tyMQdNpFTl/M/B04utNqQfcM1f5UozIT1o6YNJcNH5tp7B/mkpj4c3WR4ZPmMcLrvycSP1Nzrb7cmtTlxR2nSXANRnQhMJCHEORyBn3aFI62SJXwQxbKt1fX9UaiFZpHDJ1IqsFc56lylNGcBJK8vCCJwkscFbMnLbBGwAD+ozo4Vt/2MVHhXDFtO84rfz7Nr+J55imJnxE4BS44xm6eaF+7G+NZZGvxQEdKV/o9rpjXFeSGO+LW7qVzva2biA+l3sw6N+suzklhuNxdKQ9Q4JMwNoyDhNr4Bk1fZePSxwWC28eChXln9Vzkv8=', 'sudo': True}]
