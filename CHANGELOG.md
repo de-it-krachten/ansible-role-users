@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.1.0...v1.2.0) (2022-10-12)
+
+
+### Features
+
+* Move to FQCN ([fbd7801](https://github.com/de-it-krachten/ansible-role-users/commit/fbd780131599b6030d60bcc3dd75821c838f5a20))
+* Update CI to latest standards ([953d013](https://github.com/de-it-krachten/ansible-role-users/commit/953d01314077da61e0cd3b963bc4d801e25fcab1))
+
 # [1.1.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.0.2...v1.1.0) (2022-07-28)
 
 
