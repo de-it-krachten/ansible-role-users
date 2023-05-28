@@ -37,12 +37,8 @@
     label:
       - "name: {{ item.name }}"
 
-- name: Add public key to user
-  ansible.posix.authorized_key:
-    user: "{{ item.name }}"
-    state: present
-    key: "{{ item.sshkey }}"
-  when: item.sshkey is defined and item.sshkey|length > 0
+- name: Add public keys to alls users
+  ansible.builtin.include_tasks: authorized_keys.yml
   loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"

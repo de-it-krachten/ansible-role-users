@@ -1,0 +1,11 @@
+---
+
+- name: Add public key to user
+  ansible.posix.authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ authorized_key }}"
+  when: item.authorized_key is defined or item.authorized_keys is defined
+  loop: "{{ item.authorized_keys if item.authorized_keys | default([]) | length > 0 else [ item.authorized_key ] }}"
+  loop_control:
+    loop_var: authorized_key
