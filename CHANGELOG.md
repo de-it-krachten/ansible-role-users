@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.2.0...v1.3.0) (2023-05-28)
+
+
+### Features
+
+* Add support for multiple ssh keys ([ec52efa](https://github.com/de-it-krachten/ansible-role-users/commit/ec52efa99720a4af43a0b417419586616f809a60))
+
 # [1.2.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.1.0...v1.2.0) (2022-10-12)
 
 
