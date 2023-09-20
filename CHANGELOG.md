@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/de-it-krachten/ansible-role-users/compare/v1.4.0...v1.4.1) (2023-09-20)
+
+
+### Bug Fixes
+
+* Fix loop label to string ([fb67513](https://github.com/de-it-krachten/ansible-role-users/commit/fb675130a79aaca5d4122070e66a7d3cc683824b))
+
 # [1.4.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.3.0...v1.4.0) (2023-08-16)
 
 
