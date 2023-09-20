@@ -34,8 +34,7 @@
     append: "{{ true if item.groups is defined else omit }}"
   loop: "{{ users }}"
   loop_control:
-    label:
-      - "name: {{ item.name }}"
+    label: "{{ item.name }}"
 
 - name: Add public keys to alls users
   ansible.builtin.include_tasks: authorized_keys.yml
