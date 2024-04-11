@@ -14,6 +14,7 @@ None
 
 #### Collections
 - ansible.posix
+- ansible.windows
 
 ## Platforms
 

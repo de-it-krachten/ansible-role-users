@@ -1,6 +1,6 @@
 ---
 
-- name: Add public key to user
+- name: Add public key to user  # noqa jinja[spacing]
   ansible.posix.authorized_key:
     user: "{{ item.name }}"
     state: present

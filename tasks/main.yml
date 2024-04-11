@@ -1,7 +1,17 @@
 ---
 
-- name: Delete obsolete users
+- name: Delete obsolete users (Linux)
   ansible.builtin.include_tasks: delete.yml
+  when: ansible_os_family != 'Windows'
 
-- name: Create required users
+- name: Delete obsolete users (Windows)
+  ansible.builtin.include_tasks: delete.yml
+  when: ansible_os_family == 'Windows'
+
+- name: Create required users (Linux)
   ansible.builtin.include_tasks: create.yml
+  when: ansible_os_family != 'Windows'
+
+- name: Create required users (Windows)
+  ansible.builtin.include_tasks: create.yml
+  when: ansible_os_family == 'Windows'
