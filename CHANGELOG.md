@@ -1,3 +1,16 @@
+# [1.5.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.4.1...v1.5.0) (2024-04-12)
+
+
+### Bug Fixes
+
+* Fix for failing role when no authorized_key(s) is defined ([28d22c3](https://github.com/de-it-krachten/ansible-role-users/commit/28d22c34892ca62e77db3ffe08a17698159e0c4b))
+
+
+### Features
+
+* Add support for creating users when in inventory group ([02d19ed](https://github.com/de-it-krachten/ansible-role-users/commit/02d19ede1b6aad78bce4377bb536c2417709a79a))
+* Add support for Windows users & groups ([90d6799](https://github.com/de-it-krachten/ansible-role-users/commit/90d6799602e7053efb29b01854c02cc9353f0563))
+
 ## [1.4.1](https://github.com/de-it-krachten/ansible-role-users/compare/v1.4.0...v1.4.1) (2023-09-20)
 
 
