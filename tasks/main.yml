@@ -1,55 +1,17 @@
 ---
 
-- name: Delete all obsolete users
-  ansible.builtin.user:
-    name: "{{ item.name }}"
-    state: absent
-    remove: yes
-  loop: "{{ users_rm }}"
+- name: Delete obsolete users (Linux)
+  ansible.builtin.include_tasks: delete.yml
+  when: ansible_os_family != 'Windows'
 
-- name: Delete obsolete groups
-  ansible.builtin.group:
-    name: "{{ item.name }}"
-    state: absent
-  loop: "{{ grps_rm }}"
+- name: Delete obsolete users (Windows)
+  ansible.builtin.include_tasks: delete.yml
+  when: ansible_os_family == 'Windows'
 
-- name: Create all groups
-  ansible.builtin.group:
-    state: present
-    name: "{{ item.name }}"
-    gid: "{{ item.gid | default(omit) }}"
-  with_items: "{{ grps }}"
+- name: Create required users (Linux)
+  ansible.builtin.include_tasks: create.yml
+  when: ansible_os_family != 'Windows'
 
-- name: Create all users
-  ansible.builtin.user:
-    name: "{{ item.name }}"
-    uid: "{{ item.uid | default(omit) }}"
-    group: "{{ item.group | default(omit) }}"
-    groups: "{{ item.groups | default(omit) }}"
-    home: "{{ item.home | default(omit) }}"
-    password: "{{ item.password | default(omit) }}"
-    update_password: "{{ update_password | default('on_create') }}"
-    shell: "{{ item.shell | default('/bin/bash') }}"
-    comment: "{{ item.fullname | default(omit) }}"
-    append: "{{ true if item.groups is defined else omit }}"
-  loop: "{{ users }}"
-  loop_control:
-    label: "{{ item.name }}"
-
-- name: Add public keys to alls users
-  ansible.builtin.include_tasks: authorized_keys.yml
-  loop: "{{ users }}"
-  loop_control:
-    label: "{{ item.name }}"
-
-- name: Setup password less sudo
-  ansible.builtin.template:
-    src: sudo-nopasswd.j2
-    dest: "/etc/sudoers.d/u_{{ item.name }}"
-    owner: root
-    group: root
-    mode: '0440'
-  when: item.sudo is defined and item.sudo
-  loop: "{{ users }}"
-  loop_control:
-    label: "{{ item.name }}"
+- name: Create required users (Windows)
+  ansible.builtin.include_tasks: create.yml
+  when: ansible_os_family == 'Windows'

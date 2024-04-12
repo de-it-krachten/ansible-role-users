@@ -1,3 +1,4 @@
 ---
 collections:
-  - ansible.posix
+  - name: ansible.posix
+  - name: ansible.windows
