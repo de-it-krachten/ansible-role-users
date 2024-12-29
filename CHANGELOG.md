@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.6.0...v1.7.0) (2024-12-29)
+
+
+### Features
+
+* Update supported platforms & CI ([7bbe0ce](https://github.com/de-it-krachten/ansible-role-users/commit/7bbe0ce88dd691be7c9f2c6aacc398b14b5ab332))
+
 # [1.6.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.5.0...v1.6.0) (2024-06-03)
 
 
