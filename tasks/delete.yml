@@ -1,22 +1,22 @@
 ---
 
-- name: Delete all obsolete users (Linux)
-  ansible.builtin.user:
-    name: "{{ item.name }}"
-    state: absent
-    remove: yes
-  when:
-    - item.inventory_groups is undefined or group_names | intersect(item.inventory_groups) | length > 0
-  loop: "{{ users_rm }}"
-  loop_control:
-    label: "{{ item.name }}"
+- name: Restrict to specifc groups
+  when: item.inventory_groups is undefined or group_names | intersect(item.inventory_groups) | length > 0
+  block:
 
-- name: Delete obsolete groups (Linux)
-  ansible.builtin.group:
-    name: "{{ item.name }}"
-    state: absent
-  when:
-    - item.inventory_groups is undefined or group_names | intersect(item.inventory_groups) | length > 0
-  loop: "{{ grps_rm }}"
-  loop_control:
-    label: "{{ item.name }}"
+    - name: Delete all obsolete users (Linux)
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        state: absent
+        remove: yes
+      loop: "{{ users_rm }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Delete obsolete groups (Linux)
+      ansible.builtin.group:
+        name: "{{ item.name }}"
+        state: absent
+      loop: "{{ grps_rm }}"
+      loop_control:
+        label: "{{ item.name }}"
