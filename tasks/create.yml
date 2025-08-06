@@ -32,6 +32,7 @@
     - name: Disable password expiration
       ansible.builtin.command:
         cmd: chage -I -1 -m 0 -M -1 -E -1 {{ item.name }}
+      changed_when: true
       when: item.disable_password_expiration | default(false) | bool
       loop: "{{ users }}"
       loop_control:
