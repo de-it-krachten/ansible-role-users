@@ -1,52 +1,58 @@
 ---
 
-- name: Create all groups
-  ansible.builtin.group:
-    state: present
-    name: "{{ item.name }}"
-    gid: "{{ item.gid | default(omit) }}"
-  when:
-    - item.inventory_groups is undefined or group_names | intersect(item.inventory_groups) | length > 0
-  loop: "{{ grps }}"
-  loop_control:
-    label: "{{ item.name }}"
+- name: Restrict to specifc groups
+  when: item.inventory_groups is undefined or group_names | intersect(item.inventory_groups) | length > 0
+  block:
 
-- name: Create all users
-  ansible.builtin.user:
-    name: "{{ item.name }}"
-    uid: "{{ item.uid | default(omit) }}"
-    group: "{{ item.group | default(omit) }}"
-    groups: "{{ item.groups | default(omit) }}"
-    home: "{{ item.home | default(omit) }}"
-    password: "{{ item.password | default(omit) }}"
-    update_password: "{{ item.update_password | default(update_password) | default('on_create') }}"
-    shell: "{{ item.shell | default('/bin/bash') }}"
-    comment: "{{ item.fullname | default(omit) }}"
-    append: "{{ true if item.groups is defined else omit }}"
-  when:
-    - item.inventory_groups is undefined or group_names | intersect(item.inventory_groups) | length > 0
-  loop: "{{ users }}"
-  loop_control:
-    label: "{{ item.name }}"
+    - name: Create all groups
+      ansible.builtin.group:
+        state: present
+        name: "{{ item.name }}"
+        gid: "{{ item.gid | default(omit) }}"
+      loop: "{{ grps }}"
+      loop_control:
+        label: "{{ item.name }}"
 
-- name: Add public keys to alls users
-  ansible.builtin.include_tasks: authorized_keys.yml
-  when:
-    - item.inventory_groups is undefined or group_names | intersect(item.inventory_groups) | length > 0
-  loop: "{{ users }}"
-  loop_control:
-    label: "{{ item.name }}"
+    - name: Create all users
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        uid: "{{ item.uid | default(omit) }}"
+        group: "{{ item.group | default(omit) }}"
+        groups: "{{ item.groups | default(omit) }}"
+        home: "{{ item.home | default(omit) }}"
+        password: "{{ item.password | default(omit) }}"
+        update_password: "{{ item.update_password | default(update_password) | default('on_create') }}"
+        shell: "{{ item.shell | default('/bin/bash') }}"
+        comment: "{{ item.fullname | default(omit) }}"
+        append: "{{ true if item.groups is defined else omit }}"
+      loop: "{{ users }}"
+      loop_control:
+        label: "{{ item.name }}"
 
-- name: Setup password less sudo
-  ansible.builtin.template:
-    src: sudo-nopasswd.j2
-    dest: "/etc/sudoers.d/u_{{ item.name }}"
-    owner: root
-    group: root
-    mode: '0440'
-  when:
-    - item.sudo is defined and item.sudo
-    - item.inventory_groups is undefined or group_names | intersect(item.inventory_groups) | length > 0
-  loop: "{{ users }}"
-  loop_control:
-    label: "{{ item.name }}"
+    - name: Disable password expiration
+      ansible.builtin.command:
+        cmd: chage -I -1 -m 0 -M -1 -E -1 {{ item.name }}
+      changed_when: true
+      when: item.disable_password_expiration | default(false) | bool
+      loop: "{{ users }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Add public keys to alls users
+      ansible.builtin.include_tasks: authorized_keys.yml
+      loop: "{{ users }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Setup password less sudo
+      ansible.builtin.template:
+        src: sudo-nopasswd.j2
+        dest: "/etc/sudoers.d/u_{{ item.name }}"
+        owner: root
+        group: root
+        mode: '0440'
+      when:
+        - item.sudo is defined and item.sudo
+      loop: "{{ users }}"
+      loop_control:
+        label: "{{ item.name }}"
