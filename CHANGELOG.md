@@ -1,3 +1,15 @@
+# [1.8.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.7.0...v1.8.0) (2025-08-07)
+
+
+### Features
+
+* Add support for AlmaLinux 10 ([7a061df](https://github.com/de-it-krachten/ansible-role-users/commit/7a061dfe7313e3f3ca01ac00e75fc73cd3211009))
+* Add support for Debian 13 (Trixie) ([4389278](https://github.com/de-it-krachten/ansible-role-users/commit/4389278aa0d214773c08f1ec7fd9b7a4138380dd))
+* Add support for non-expiry passwords ([bd296a3](https://github.com/de-it-krachten/ansible-role-users/commit/bd296a3df01b65bbd14e0cf273b8e3f33effd9a7))
+* Add support for OracleLinux 10 ([6342b8f](https://github.com/de-it-krachten/ansible-role-users/commit/6342b8f20086d02d52ed3e5bbac48f48db3185a8))
+* Add support for Red Hat Enterprise Linux 10 ([a1278ce](https://github.com/de-it-krachten/ansible-role-users/commit/a1278ce09d5d405bd7ebecd88437885bb41ff8e4))
+* Add support for RockyLinux 10 ([e1ff653](https://github.com/de-it-krachten/ansible-role-users/commit/e1ff65369446d03a85490acc050e180481dd9b22))
+
 # [1.7.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.6.0...v1.7.0) (2024-12-29)
 
 
