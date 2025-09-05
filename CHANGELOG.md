@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.8.0...v1.9.0) (2025-09-05)
+
+
+### Features
+
+* Add support for password change at next logon ([1d0c7bd](https://github.com/de-it-krachten/ansible-role-users/commit/1d0c7bd3f39804ec667fa7f5d617dc6e54c3b848))
+
 # [1.8.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.7.0...v1.8.0) (2025-08-07)
 
 
