@@ -37,7 +37,6 @@ Supported platforms
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
 - Debian 13 (Trixie)
-- Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
 - Ubuntu 24.04 LTS
 - Fedora 41
@@ -85,6 +84,8 @@ grps_rm: []
       - name: user1
         uid: 2000
         group: user1
+        password: test1234
+        password_change_at_login: true
       - name: user2
         uid: 2001
         group: group2

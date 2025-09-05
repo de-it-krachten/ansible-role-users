@@ -20,6 +20,8 @@ molecule:
         - name: user1
           uid: 2000
           group: user1
+          password: 'test1234'
+          password_change_at_login: true
         - name: user2
           uid: 2001
           group: group2
