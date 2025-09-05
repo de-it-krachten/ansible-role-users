@@ -13,21 +13,40 @@
       loop_control:
         label: "{{ item.name }}"
 
-    - name: Create all users
+    - name: Create all users # noqa jinja[spacing]
       ansible.builtin.user:
         name: "{{ item.name }}"
         uid: "{{ item.uid | default(omit) }}"
         group: "{{ item.group | default(omit) }}"
         groups: "{{ item.groups | default(omit) }}"
         home: "{{ item.home | default(omit) }}"
-        password: "{{ item.password | default(omit) }}"
+        password: >-
+          {%- if item.password | default('') | regex_search('^\$') -%}
+          {{ item.password }}
+          {%- elif item.password | default('') | length > 0 -%}
+          {{ item.password | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}
+          {%- else -%}
+          omit
+          {%- endif -%}
         update_password: "{{ item.update_password | default(update_password) | default('on_create') }}"
         shell: "{{ item.shell | default('/bin/bash') }}"
         comment: "{{ item.fullname | default(omit) }}"
         append: "{{ true if item.groups is defined else omit }}"
+      register: __user_create
       loop: "{{ users }}"
       loop_control:
         label: "{{ item.name }}"
+
+    - name: Make user change password at next login
+      ansible.builtin.command:
+        cmd: chage -d 0 {{ item.item.name }}
+      changed_when: true
+      when:
+        - item.changed
+        - item.item.password_change_at_login | default(False) | bool
+      loop: "{{ __user_create.results }}"
+      loop_control:
+        label: "{{ item.item.name }}"
 
     - name: Disable password expiration
       ansible.builtin.command:
