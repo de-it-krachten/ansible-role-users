@@ -20,11 +20,15 @@ molecule:
         - name: user1
           uid: 2000
           group: user1
+          # password can be hashed or in clear text
           password: 'test1234'
+          # Enforce user to change password at next logon
           password_change_at_login: true
         - name: user2
           uid: 2001
           group: group2
+          # password can be hashed or in clear text
+          password: '$6$rounds=656000$28661$zl/r.FdmhbzxidA.0QeGc7D4IYrTIIprLh3GvkA7EnDa4HAOkv8MCCXMGJescVwr1jFlupZzr8egn2bAyre8T1'
           shell: /bin/sh
           authorized_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC5rUvo3sZrPcKYmezty1kOUX61jF03EyDJ8DVcmU4heTpTm35/UhltfcJkYPNUChpLJelfm1y+d4MKSJPsBcRmbep3757xUCqQYej9itwpBY0n2XzdurR6uJh1cFfiynsKFnDbr/pqOatY/GedFMVABMtdMf9zJDfYpfEzvDxbN1hpMq+/dJTs+5EjAjgon0mNZ1925tyMQdNpFTl/M/B04utNqQfcM1f5UozIT1o6YNJcNH5tp7B/mkpj4c3WR4ZPmMcLrvycSP1Nzrb7cmtTlxR2nSXANRnQhMJCHEORyBn3aFI62SJXwQxbKt1fX9UaiFZpHDJ1IqsFc56lylNGcBJK8vCCJwkscFbMnLbBGwAD+ozo4Vt/2MVHhXDFtO84rfz7Nr+J55imJnxE4BS44xm6eaF+7G+NZZGvxQEdKV/o9rpjXFeSGO+LW7qVzva2biA+l3sw6N+suzklhuNxdKQ9Q4JMwNoyDhNr4Bk1fZePSxwWC28eChXln9Vzkv8=
           sudo: true

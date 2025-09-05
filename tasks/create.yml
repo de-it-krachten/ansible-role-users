@@ -13,7 +13,7 @@
       loop_control:
         label: "{{ item.name }}"
 
-    - name: Create all users
+    - name: Create all users # noqa jinja[spacing]
       ansible.builtin.user:
         name: "{{ item.name }}"
         uid: "{{ item.uid | default(omit) }}"
