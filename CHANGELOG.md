@@ -1,3 +1,18 @@
+# [1.10.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.9.0...v1.10.0) (2026-03-15)
+
+
+### Bug Fixes
+
+* defaults to '!' if no password supplied ([e3b5ea7](https://github.com/de-it-krachten/ansible-role-users/commit/e3b5ea7c882ea9e63e3327b16c8dab772bc5ca1c))
+
+
+### Features
+
+* Added support for Fedora 43 ([a785102](https://github.com/de-it-krachten/ansible-role-users/commit/a7851029b3abbf46c774dc45779c202cbf36d4d3))
+* Drop support for Fedora 41 ([4942ce5](https://github.com/de-it-krachten/ansible-role-users/commit/4942ce539146e4c5a7bf49deecc32df72d30d49c))
+* Drop support for openSUSE Leap 15 ([730a4b9](https://github.com/de-it-krachten/ansible-role-users/commit/730a4b9d22b48410b210f0be03af23188f75ee50))
+* Drop support for SUSE Linux Enterprise 15 ([aa4a75d](https://github.com/de-it-krachten/ansible-role-users/commit/aa4a75d5846612a4835f380fcc003e0d5d5ae741))
+
 # [1.9.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.8.0...v1.9.0) (2025-09-05)
 
 
