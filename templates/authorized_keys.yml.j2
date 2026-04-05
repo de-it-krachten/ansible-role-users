@@ -1,0 +1,8 @@
+---
+{% if item.authorized_keys | default([]) | length > 0 %}
+{{ item.authorized_keys }}
+{% elif item.authorized_key | default('') | length > 0 %}
+[ "{{ item.authorized_key }}" ]
+{% else %}
+[]
+{% endif %}

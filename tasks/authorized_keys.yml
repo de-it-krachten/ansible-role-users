@@ -1,18 +1,11 @@
 ---
 
-- name: Add public key to user  # noqa jinja[spacing]
+- name: Add public keys to user  # noqa jinja[spacing]
   ansible.posix.authorized_key:
     user: "{{ item.name }}"
     state: present
     key: "{{ authorized_key }}"
   when: item.authorized_key is defined or item.authorized_keys is defined
-  loop: >-
-    {%- if item.authorized_keys | default([]) | length > 0 -%}
-    {{ item.authorized_keys }}
-    {%- elif item.authorized_key | default('') | length > 0 -%}
-    [ "{{ item.authorized_key }}" ]
-    {%- else -%}
-    []
-    {%- endif -%}
+  loop: "{{ lookup('template', 'authorized_keys.yml.j2') | from_yaml }}"
   loop_control:
     loop_var: authorized_key
