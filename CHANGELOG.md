@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/de-it-krachten/ansible-role-users/compare/v1.10.0...v1.10.1) (2026-04-08)
+
+
+### Bug Fixes
+
+* Add support for ansible-code 2.19+ ([84f35a9](https://github.com/de-it-krachten/ansible-role-users/commit/84f35a9ba7bbb00e279338b3d9bf13bb8e3704c3))
+
 # [1.10.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.9.0...v1.10.0) (2026-03-15)
 
 
