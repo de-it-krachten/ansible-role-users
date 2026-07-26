@@ -1,3 +1,13 @@
+# [1.11.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.10.1...v1.11.0) (2026-07-26)
+
+
+### Features
+
+* Add support for ansible-core 2.20+ ([4a9915a](https://github.com/de-it-krachten/ansible-role-users/commit/4a9915ac722caf790d6c561bd23105a220afe23b))
+* Added support for Fedora 44 ([8f46f7e](https://github.com/de-it-krachten/ansible-role-users/commit/8f46f7eb3e7993d849392f7e262c028242a3264d))
+* Added support for Ubuntu 26.04 LTS ([fd77468](https://github.com/de-it-krachten/ansible-role-users/commit/fd77468136b923eb01d1bc22024321135ed66231))
+* Drop support for Fedora 42 ([a12ae60](https://github.com/de-it-krachten/ansible-role-users/commit/a12ae60a1033f5748758085d4bcfa57e2c4c02a7))
+
 ## [1.10.1](https://github.com/de-it-krachten/ansible-role-users/compare/v1.10.0...v1.10.1) (2026-04-08)
 
 
