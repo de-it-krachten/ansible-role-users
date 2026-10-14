@@ -8,7 +8,7 @@
       ansible.builtin.user:
         name: "{{ item.name }}"
         state: absent
-        remove: yes
+        remove: "{{ item.remove | default(true) }}"
       loop: "{{ users_rm }}"
       loop_control:
         label: "{{ item.name }}"
