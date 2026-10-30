@@ -1,3 +1,15 @@
+# [1.12.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.11.0...v1.12.0) (2026-10-30)
+
+
+### Bug Fixes
+
+* Make it possible to keep home directories of removed users ([641a6eb](https://github.com/de-it-krachten/ansible-role-users/commit/641a6eb8fd99baca9973c0d006286ad079042cab))
+
+
+### Features
+
+* Drop support for Debian 11 (Bullseye) ([42671f4](https://github.com/de-it-krachten/ansible-role-users/commit/42671f4b3e80bb0ac1d0acba8c15c57f5a608af2))
+
 # [1.11.0](https://github.com/de-it-krachten/ansible-role-users/compare/v1.10.1...v1.11.0) (2026-07-26)
 
 
